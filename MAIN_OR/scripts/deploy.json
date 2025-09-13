@@ -1,0 +1,33 @@
+{
+  "name": "Mini CRM Deployment Scripts",
+  "description": "Database initialization and deployment scripts",
+  "scripts": {
+    "init-database": {
+      "description": "Initialize database with sample data",
+      "command": "node scripts/init-db.js"
+    },
+    "migrate-database": {
+      "description": "Run database migrations",
+      "command": "node scripts/migrate.js"
+    },
+    "seed-data": {
+      "description": "Seed database with sample customers and segments",
+      "command": "node scripts/seed.js"
+    }
+  },
+  "deployment": {
+    "vercel": {
+      "build": "npm run build",
+      "install": "npm install",
+      "dev": "npm run dev"
+    },
+    "docker": {
+      "build": "docker build -t mini-crm .",
+      "run": "docker run -p 3000:3000 mini-crm"
+    }
+  },
+  "environment": {
+    "required": ["NEXT_PUBLIC_API_URL", "NEXTAUTH_SECRET", "NEXTAUTH_URL"],
+    "optional": ["MONGODB_URI", "GROQ_API_KEY", "GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET"]
+  }
+}
